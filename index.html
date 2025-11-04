@@ -3,8 +3,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="refresh" content="0; url=form.html">
     <title>Form Validation Application</title>
+    <script>
+        // Redirect based on environment
+        // If PHP is available (traditional hosting), use form.html
+        // Otherwise use static version (GitHub Pages)
+        if (window.location.hostname.includes('github.io')) {
+            window.location.href = 'form-static.html';
+        } else {
+            window.location.href = 'form.html';
+        }
+    </script>
+    <meta http-equiv="refresh" content="0; url=form-static.html">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">

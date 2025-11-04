@@ -1,0 +1,349 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Information Form</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+     body {
+            font-family: 'Inter', sans-serif;
+            background: #FBF7F2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .form-container, .result-container {
+            width: 100%;
+            max-width: 420px;
+            background: #FBF7F2;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 20px rgba(0, 0, 0, 0.05);
+            padding: 40px;
+        }
+
+        .result-container {
+            display: none;
+        }
+
+        h1 {
+            font-size: 28px;
+            font-weight: 600;
+            color: #6B4423;
+            margin-bottom: 8px;
+            letter-spacing: -0.5px;
+        }
+
+        .subtitle {
+            font-size: 14px;
+            color: #6B4423;
+            margin-bottom: 32px;
+        }
+
+        .greeting {
+            font-size: 16px;
+            color: #6B4423;
+            margin-bottom: 32px;
+            font-weight: 500;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        label {
+            display: block;
+            font-size: 13px;
+            font-weight: 500;
+            color: #6B4423;
+            margin-bottom: 8px;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        input[type="text"],
+        input[type="email"],
+        input[type="number"] {
+            width: 100%;
+            padding: 11px 14px;
+            border: 1.5px solid #8B5A3C;
+            border-radius: 8px;
+            font-size: 14px;
+            font-family: 'Inter', sans-serif;
+            background: #F5F1ED;
+            transition: all 0.3s ease;
+            color: #1a202c;
+        }
+
+        input[type="text"]::placeholder,
+        input[type="email"]::placeholder,
+        input[type="number"]::placeholder {
+            color: #B8A89A;
+        }
+
+        input[type="text"]:focus,
+        input[type="email"]:focus,
+        input[type="number"]:focus {
+            outline: none;
+            border-color: #D4A574;
+            background: white;
+            box-shadow: 0 0 0 3px rgba(212, 165, 116, 0.1);
+        }
+
+        .submit-btn, .btn {
+            width: 100%;
+            padding: 12px 16px;
+            margin-top: 24px;
+            background: #8B5A3C;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            font-family: 'Inter', sans-serif;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            letter-spacing: 0.3px;
+            text-decoration: none;
+            display: inline-block;
+            text-align: center;
+        }
+
+        .submit-btn:hover, .btn:hover {
+            background: #6B4423;
+            box-shadow: 0 4px 12px rgba(139, 90, 60, 0.3);
+        }
+
+        .submit-btn:active, .btn:active {
+            transform: scale(0.98);
+        }
+
+        .info-section {
+            margin-bottom: 28px;
+        }
+
+        .info-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B4423;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 6px;
+        }
+
+        .info-value {
+            font-size: 16px;
+            color: #FBF7F2;
+            padding: 10px 12px;
+            background: #5D3A1A;
+            border-radius: 6px;
+            border-left: 3px solid #8B5A3C;
+        }
+
+        .eligibility-section {
+            margin-top: 32px;
+            padding-top: 24px;
+            border-top: 1px solid #6B4423;
+        }
+
+        .status-label {
+            font-size: 12px;
+            font-weight: 600;
+            color: #6B4423;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            margin-bottom: 10px;
+        }
+
+        .status-message {
+            padding: 12px 16px;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 500;
+            text-align: center;
+        }
+
+        .status-eligible {
+            background: #e8f5e9;
+            color: #2e7d32;
+            border: 1.5px solid #c8e6c9;
+        }
+
+        .status-ineligible {
+            background: #ffebee;
+            color: #c62828;
+            border: 1.5px solid #ffcdd2;
+        }
+
+        @media (max-width: 480px) {
+            .form-container, .result-container {
+                padding: 30px 20px;
+            }
+
+            h1 {
+                font-size: 24px;
+            }
+        }
+
+   
+        footer {
+            margin-top: 40px;
+            padding-top: 20px;
+            border-top: 1px solid #8B5A3C;
+            text-align: center;
+            font-size: 12px;
+            color: #6B4423;
+            letter-spacing: 0.3px;
+        }
+
+    </style>
+</head>
+<body>
+    <div class="form-container" id="formContainer">
+        <h1>User Information</h1>
+        <p class="subtitle">Please provide your details below</p>
+
+        <form id="userForm">
+            <div class="form-group">
+                <label for="name">Full Name</label>
+                <input 
+                    type="text" 
+                    id="name" 
+                    name="name" 
+                    placeholder="John Doe"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="email">Email Address</label>
+                <input 
+                    type="email" 
+                    id="email" 
+                    name="email" 
+                    placeholder="john@example.com"
+                    required
+                >
+            </div>
+
+            <div class="form-group">
+                <label for="age">Age</label>
+                <input 
+                    type="number" 
+                    id="age" 
+                    name="age" 
+                    placeholder="25"
+                    required
+                    min="1"
+                    max="150"
+                >
+            </div>
+
+            <button type="submit" class="submit-btn">Submit</button>
+
+       
+            <footer>
+                DEMILADE ILESANMI | RUN/CMP/23/15262 | 300 LEVEL | COMPUTER SCIENCE
+            </footer>
+        </form>
+    </div>
+
+    <div class="result-container" id="resultContainer">
+        <h1>Submission Complete</h1>
+        <p class="greeting">Thank you, <strong id="resultName"></strong>! Your information has been received.</p>
+
+        <div class="info-section">
+            <div class="info-label">Full Name</div>
+            <div class="info-value" id="displayName"></div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-label">Email Address</div>
+            <div class="info-value" id="displayEmail"></div>
+        </div>
+
+        <div class="info-section">
+            <div class="info-label">Age</div>
+            <div class="info-value" id="displayAge"></div>
+        </div>
+
+        <div class="eligibility-section">
+            <div class="status-label">Eligibility Status</div>
+            <div class="status-message" id="eligibilityStatus"></div>
+        </div>
+
+        <button class="btn" id="goBackBtn">Go Back</button>
+
+   
+        <footer>
+            DEMILADE ILESANMI | RUN/CMP/23/15262 | 300 LEVEL | COMPUTER SCIENCE
+        </footer>
+    </div>
+
+    <script>
+        // Handle form submission
+        document.getElementById('userForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            // Get form values
+            const name = document.getElementById('name').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const age = parseInt(document.getElementById('age').value);
+            
+            // Basic sanitization (escaping HTML)
+            const sanitizeName = name.replace(/[<>]/g, '');
+            const sanitizeEmail = email.replace(/[<>]/g, '');
+            
+            // Check eligibility
+            const isEligible = age >= 18;
+            
+            // Display results
+            document.getElementById('resultName').textContent = sanitizeName;
+            document.getElementById('displayName').textContent = sanitizeName;
+            document.getElementById('displayEmail').textContent = sanitizeEmail;
+            document.getElementById('displayAge').textContent = age;
+            
+            // Set eligibility status
+            const statusDiv = document.getElementById('eligibilityStatus');
+            if (isEligible) {
+                statusDiv.className = 'status-message status-eligible';
+                statusDiv.textContent = '✓ You are eligible (18 or above)';
+            } else {
+                statusDiv.className = 'status-message status-ineligible';
+                statusDiv.textContent = '✗ You are not eligible (under 18)';
+            }
+            
+            // Hide form, show results
+            document.getElementById('formContainer').style.display = 'none';
+            document.getElementById('resultContainer').style.display = 'block';
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        });
+        
+        // Handle go back button
+        document.getElementById('goBackBtn').addEventListener('click', function() {
+            // Show form, hide results
+            document.getElementById('formContainer').style.display = 'block';
+            document.getElementById('resultContainer').style.display = 'none';
+            
+            // Reset form
+            document.getElementById('userForm').reset();
+            
+            // Scroll to top
+            window.scrollTo(0, 0);
+        });
+    </script>
+</body>
+</html>
