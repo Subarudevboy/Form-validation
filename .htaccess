@@ -23,7 +23,7 @@
 </IfModule>
 
 # PHP Settings (if needed)
-<IfModule mod_php7.c>
+<IfModule mod_php.c>
     php_value upload_max_filesize 10M
     php_value post_max_size 10M
     php_value max_execution_time 300
@@ -32,8 +32,13 @@
 
 # Deny access to sensitive files
 <FilesMatch "^\.">
-    Order allow,deny
-    Deny from all
+    <IfModule mod_authz_core.c>
+        Require all denied
+    </IfModule>
+    <IfModule !mod_authz_core.c>
+        Order allow,deny
+        Deny from all
+    </IfModule>
 </FilesMatch>
 
 # Custom Error Pages (optional)
