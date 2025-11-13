@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Form Validation Application</title>
+    <script>
+        // Redirect based on environment
+        // If PHP is available (traditional hosting), use form.html
+        // Otherwise use static version (GitHub Pages)
+        if (window.location.hostname.includes('github.io')) {
+            window.location.href = 'form-static.html';
+        } else {
+            window.location.href = 'form.html';
+        }
+    </script>
+    <meta http-equiv="refresh" content="0; url=form-static.html">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background: #FBF7F2;
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .redirect-container {
+            text-align: center;
+            background: white;
+            padding: 40px;
+            border-radius: 12px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07), 0 10px 20px rgba(0, 0, 0, 0.05);
+        }
+
+        h1 {
+            font-size: 24px;
+            font-weight: 600;
+            color: #6B4423;
+            margin-bottom: 16px;
+        }
+
+        p {
+            color: #6B4423;
+            margin-bottom: 20px;
+        }
+
+        a {
+            display: inline-block;
+            padding: 12px 24px;
+            background: #8B5A3C;
+            color: white;
+            text-decoration: none;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: all 0.3s ease;
+        }
+
+        a:hover {
+            background: #6B4423;
+            box-shadow: 0 4px 12px rgba(139, 90, 60, 0.3);
+        }
+
+        .loading {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            border: 3px solid #8B5A3C;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+            margin-top: 20px;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <div class="redirect-container">
+        <h1>Welcome to Form Validation</h1>
+        <p>Redirecting to the form...</p>
+        <div class="loading"></div>
+        <p style="margin-top: 20px; font-size: 14px;">If you are not redirected automatically,</p>
+        <a href="form.html">Click here to continue</a>
+    </div>
+</body>
+</html>
